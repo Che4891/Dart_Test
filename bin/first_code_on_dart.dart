@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
-late int global; // late - модификатор для того чтоб задавать переменную без значения вне функции
+late int
+    global; // late - модификатор для того чтоб задавать переменную без значения вне функции
 void main() {
   print('Hello world!');
 
@@ -49,13 +50,13 @@ void main() {
   //string (UTF-16)
   String myName = 'I\'m Anton'; // одинарніе ковічки ( \ - для єкранирования)
   String mySurName = "Izotov"; // Двойніе кавічки
-  print(mySurName[0]); // получаем первій символ строки   
+  print(mySurName[0]); // получаем первій символ строки
   String fullName = ''' I am
   Anton 
   Izotov'''; // Тройние кавічки для многострочніх строк
-  String text = '$myName + $mySurName = ${fullName.toUpperCase()}'; // $ - для вівода переменніх ${}для вівода віражений
+  String text =
+      '$myName + $mySurName = ${fullName.toUpperCase()}'; // $ - для вівода переменніх ${}для вівода віражений
   print(text);
-
 
   //boolean (true && false)
   bool a = true;
@@ -69,28 +70,38 @@ void main() {
 
   // в Unicode тоже можна показати місце наступним чином \uXXXX
 
-  Runes input = Runes('\u2665 \u{1f600}'); 
+  Runes input = Runes('\u2665 \u{1f600}');
   print(String.fromCharCodes(input));
-
-
-
 
   //Symbol
 
   Symbol object = new Symbol('name');
-    print(object);
+  print(object);
 
   //Null
 
 //чтоб переменная могла принять null после типа нужно ставить ? например:
-int? notANumber = null;
+  int? notANumber = null;
   //List, Set, Map
 
+// ПРЕОБРОЗОВАНИЕ ТИПОВ И ПОДТИПОВ (статических)
 
-// ПРЕОБРОЗОВАНИЕ ТИПОВ И ПОДТИПОВ
+  num myNumber = 523;
+  final someInt = myNumber
+      as int; //`as` заставляет розпозновать 'num' как его подтип которій я указал
+  final testBouble = someInt.toDouble(); // int => double
+  final testString = testBouble.toString(); // double => string
+  print(testString);
 
-num myNumber = 5;
-final someInt = myNumber as double; //`as` заставляет розпозновать 'num' как его подтип которій я указал  
-print(someInt);
+  // ДИНАМИЧЕСКИЕ ТИПІ ДАННІХ
 
+  dynamic testDynamic = 10; // принимает любой тип. и можно на любой поменять
+  testDynamic = "Hello";
+
+  Object? testObject = 23; //правильнее вместо dynamic использовать Object
+  testObject = 'Hello'; 
+
+  var testVar; // var по умолчанию сначала тоже dynamic
+  testVar = 10;
+  testVar = 'Hello';
 }
