@@ -99,9 +99,40 @@ void main() {
   testDynamic = "Hello";
 
   Object? testObject = 23; //правильнее вместо dynamic использовать Object
-  testObject = 'Hello'; 
+  testObject = 'Hello';
 
   var testVar; // var по умолчанию сначала тоже dynamic
   testVar = 10;
   testVar = 'Hello';
+
+// УСЛОЫНИЕ КОНСТРУКЦИИ IF ELSE
+
+  var grade = 55;
+
+  if (grade <= 50) { // Рабртает аналогично JS
+    print('First Ok');
+  } else if (grade >= 100) {
+    print("Second Ok");
+  } else if (grade <= 150) {
+    print("Therd Ok");
+  }
+
+  var x = 1;
+  var y = 3;
+  int z = (x > y) ? (x - y) : (x + y); // тернарное выражение аналогично JS
+  print(z);
+
+// УСЛОЫНИЕ КОНСТРУКЦИИ SWITCH CASE
+
+  var mySwich = 'test'; // Рабртает аналогично JS
+  switch (mySwich) {
+    case 'noTest':
+      print('Problem');
+      break;
+    case 'test':
+      print('All ok');
+      break;
+    default:
+      print('Somsing wron');
+  }
 }
