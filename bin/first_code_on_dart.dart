@@ -109,7 +109,8 @@ void main() {
 
   var grade = 55;
 
-  if (grade <= 50) { // Рабртает аналогично JS
+  if (grade <= 50) {
+    // Рабртает аналогично JS
     print('First Ok');
   } else if (grade >= 100) {
     print("Second Ok");
@@ -135,4 +136,19 @@ void main() {
     default:
       print('Somsing wron');
   }
+
+// ЦИКЛИ
+  int counter = 0;
+
+  do {
+    counter++; // дуйствие в цикле
+    print('My number $counter');
+    if (counter == 4) {
+      print('counter === 4');
+      continue;
+    } else if (counter == 9) {
+      print('stop');
+      breake;
+    }
+  } while (counter < 10); // правила для цикла
 }
