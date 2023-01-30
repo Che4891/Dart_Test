@@ -148,7 +148,45 @@ void main() {
       continue;
     } else if (counter == 9) {
       print('stop');
-      breake;
+      break;
     }
   } while (counter < 10); // правила для цикла
+
+  //LIST(масиві)
+
+
+//Создание массива
+  var fruits = ['apple', 'orange', 'pear']; //обичній массив но автоматом определяеться его тип
+  print(fruits);
+  fruits = [];
+  fruits = ['pineapple', 'watermelone', 'lemon'];
+  print(fruits);
+
+  List<String>  apple = []; //если задавать пустой массив изначально желательно задать его тип
+  var orange = <String>[];
+  print('$orange; $apple');
+
+  // получение елемента из массива
+  final secondElement = fruits[1];
+  final index = fruits.indexOf('watermelone'); // получение index по value
+  final value = fruits[index]; //получение value по index
+  print('$secondElement, $index, $value');
+
+  // Замена елемента 
+  fruits[1] = 'avocado';
+
+  //Добавление елемента
+  fruits.add('banana'); // Добавление в конец списка
+  fruits.insert(1, 'orange'); //Перавій аргумент место на которое будет добавлен елемент
+
+  //Удаление елемента
+  fruits.remove('banana'); // удаление с помощью value
+  fruits.removeAt(1); // удаление с помощью index
+
+  //Сортировка списка
+  var integers = [105, 55, 3, 98, 4];
+  integers.sort();
+  
+
+
 }
