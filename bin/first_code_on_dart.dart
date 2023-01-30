@@ -140,15 +140,35 @@ void main() {
 // ЦИКЛИ
   int counter = 0;
 
-  do {
+  
+  // DO WHILE
+
+  do { // правила (while) проверяеться после входа в цикл
     counter++; // дуйствие в цикле
-    print('My number $counter');
     if (counter == 4) {
       print('counter === 4');
       continue;
     } else if (counter == 9) {
       print('stop');
-      breake;
+      break;
     }
+        print('My number $counter');
   } while (counter < 10); // правила для цикла
+
+
+  
+  //WHILE
+
+  while(counter < 10) { // правила (while) проверяеться до входа в цикл 
+    print('test');
+    counter++;
+  }
+
+
+  //FOR
+  for (var i = 0; i < 10; i++) { // перебо цикла FOR 1) задаем значение I; 2) устанавливаем правило. 3) меняем значение
+    if (i % 2 == 0) {
+      print(i);
+    }
+  }
 }
