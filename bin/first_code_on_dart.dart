@@ -203,6 +203,12 @@ void main() {
 
   //Сортировка списка
   var integers = [105, 55, 3, 98, 4];
-  integers.sort();
+  integers.sort(); // Сортировка работает так же как и в JS
+  final minVal = integers[0];
+  final maxVal = integers[integers.length-1];
+  print('In $integers is minVal: $minVal is maxVal: $maxVal');
+
+  fruits.sort(); // Сортирует строки тоже. (как и JS по алфаіиту и по длине)
+  print(fruits);
   
 }
