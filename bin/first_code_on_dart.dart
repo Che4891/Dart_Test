@@ -194,8 +194,9 @@ void main() {
   // получение елемента из массива
   final secondElement = fruits[1];
   final index = fruits.indexOf('watermelone'); // получение index по value
-  final value = fruits[index]; //получение value по index  
-  final isContain = fruits.contains('watermelone'); // проверка на наличие такого  значение в списке
+  final value = fruits[index]; //получение value по index
+  final isContain = fruits
+      .contains('watermelone'); // проверка на наличие такого  значение в списке
 
   print('$secondElement, $index, $value, $isContain');
 
@@ -275,15 +276,39 @@ void main() {
   // if в списках
   const orangeAllergy = true;
 
-  final ifInList = [ if (!orangeAllergy)'orange', 'pear'];
+  final ifInList = [if (!orangeAllergy) 'orange', 'pear'];
 
-  final bigFruts = ['BANANA',for(final big in total) big.toUpperCase()];
+  final bigFruts = ['BANANA', for (final big in total) big.toUpperCase()];
 
   print('$total && $ifInList && $bigFruts');
 
-
   //SET {Обекты}
 
-  
+  //create SET
+
+  final setOne = <int>{1, 3, 5}; // создание SET со значением int
+  final setTwo = {4, 'hello', 'world'}; // создание сета без указания типа
+  final setThree = Set.from(total); // создание сета из массива
+  print('$setOne && $setTwo && $setThree');
+
+  //методі SET
+  final newFruts = {'watermelone', 'apple', 'pannapple', 'orange', 'pear'};
+  print(newFruts.contains('pannapple')); // проверка на наличие елемента = true
+  print(newFruts.containsAll({
+    'pannapple',
+    'bananna'
+  })); // проверка на наличие нескольких елементов = false
+  newFruts.add('bananna'); // добавление елемента
+  newFruts.remove('pear'); // удаление елемента
+  newFruts.addAll(['kiwi', 'avocado']);
+  print(newFruts);
+   
+  for (var element in newFruts) {
+    print('I\'m love $element');
+  }
+
+  final freshFruts = newFruts.toSet(); // копирование обекта (если присваивать на прямую по следующие изменения будут относиться не ттолько к копии но и к орегиналу удаление и т .д)
+  print(freshFruts);
+
 
 }
