@@ -282,7 +282,7 @@ void main() {
   print('$total && $ifInList && $bigFruts');
 
 
-  //SET {Обеуты}
+  //SET {Обекты}
 
   
 
