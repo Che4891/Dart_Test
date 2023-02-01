@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'dart:ffi';
 
 late int
@@ -140,10 +142,10 @@ void main() {
 // ЦИКЛИ
   int counter = 0;
 
-  
   // DO WHILE
 
-  do { // правила (while) проверяеться после входа в цикл
+  do {
+    // правила (while) проверяеться после входа в цикл
     counter++; // дуйствие в цикле
     if (counter == 4) {
       print('counter === 4');
@@ -152,19 +154,20 @@ void main() {
       print('stop');
       break;
     }
-        print('My number $counter');
+    print('My number $counter');
   } while (counter < 10); // правила для цикла
 
-    //WHILE
+  //WHILE
 
-  while(counter < 10) { // правила (while) проверяеться до входа в цикл 
+  while (counter < 10) {
+    // правила (while) проверяеться до входа в цикл
     print('test');
     counter++;
   }
 
-
   //FOR
-  for (var i = 0; i < 10; i++) { // перебо цикла FOR 1) задаем значение I; 2) устанавливаем правило. 3) меняем значение
+  for (var i = 0; i < 10; i++) {
+    // перебо цикла FOR 1) задаем значение I; 2) устанавливаем правило. 3) меняем значение
     if (i % 2 == 0) {
       print(i);
     }
@@ -172,30 +175,37 @@ void main() {
 
   //LIST(масиві)
 
-
 //Создание массива
-  var fruits = ['apple', 'orange', 'pear']; //обичній массив но автоматом определяеться его тип
+  var fruits = [
+    'apple',
+    'orange',
+    'pear'
+  ]; //обичній массив но автоматом определяеться его тип
   print(fruits);
   fruits = [];
   fruits = ['pineapple', 'watermelone', 'lemon'];
   print(fruits);
 
-  List<String>  apple = []; //если задавать пустой массив изначально желательно задать его тип
+  List<String> apple =
+      []; //если задавать пустой массив изначально желательно задать его тип
   var orange = <String>[];
   print('$orange; $apple');
 
   // получение елемента из массива
   final secondElement = fruits[1];
   final index = fruits.indexOf('watermelone'); // получение index по value
-  final value = fruits[index]; //получение value по index
-  print('$secondElement, $index, $value');
+  final value = fruits[index]; //получение value по index  
+  final isContain = fruits.contains('watermelone'); // проверка на наличие такого  значение в списке
 
-  // Замена елемента 
+  print('$secondElement, $index, $value, $isContain');
+
+  // Замена елемента
   fruits[1] = 'avocado';
 
   //Добавление елемента
   fruits.add('banana'); // Добавление в конец списка
-  fruits.insert(1, 'orange'); //Перавій аргумент место на которое будет добавлен елемент
+  fruits.insert(
+      1, 'orange'); //Перавій аргумент место на которое будет добавлен елемент
 
   //Удаление елемента
   fruits.remove('banana'); // удаление с помощью value
@@ -205,10 +215,75 @@ void main() {
   var integers = [105, 55, 3, 98, 4];
   integers.sort(); // Сортировка работает так же как и в JS
   final minVal = integers[0];
-  final maxVal = integers[integers.length-1];
+  final maxVal = integers[integers.length - 1];
   print('In $integers is minVal: $minVal is maxVal: $maxVal');
 
   fruits.sort(); // Сортирует строки тоже. (как и JS по алфаіиту и по длине)
   print(fruits);
+
+// Изменякмые и не изменякмые списки
+  var testList = ['tast', 'test1', 'test2'];
+  testList = [];
+  testList = [
+    'test3',
+    'test4',
+    'test5'
+  ]; // var дает возможность перезаписывать весь список или частично через методы
+
+  final newList =
+      testList; // final не дает возможности перезаписать весь список только изменять с помощью методов или перезаписывать части его
+  newList.add('test6');
+  newList.remove('test3');
+  newList[1] = 'test777';
+
+  //не изменяемым его делает следующее
+  final unmodifiablrList = List.unmodifiable(
+      newList); // такой список не возможно изменять из за метода List.unmodifiable
+  final lastList = const [
+    'immutable1',
+    'immutable2',
+  ]; // такой список не возможно изменять из за const
+  print('$testList && $newList immutable list: $unmodifiablrList && $lastList');
+
+  // Методы списков
+
+  print(fruits
+      .last); // получение последнего елемента или (fruits[fruits.length - 1])
+  print(fruits.first); // получение первого елемента иди (fruits[0])
+  print(fruits.isEmpty); // проверка или пустой
+  print(fruits.isNotEmpty); // проверка или не пустой
+
+  for (var i = 0; i < fruits.length; i++) {
+    final fruit = fruits[i];
+    print('I like : $fruit');
+  }
+
+  for (var fruit in fruits) {
+    // for in это агалог for но без доп проверок индекса
+    print('I love : $fruit');
+  }
+
+  // Обединение списков
+  const appleAndPanapple = ['apple', 'pannapple'];
+  const orangeAndPear = ['orange', 'pear'];
+  final total = [
+    'watermelone',
+    ...appleAndPanapple
+  ]; // через спред операторт (...) добавляес развернутый список в список.
+  total.addAll(orangeAndPear); // делает то же что и спред оператор
+
+  // if в списках
+  const orangeAllergy = true;
+
+  final ifInList = [ if (!orangeAllergy)'orange', 'pear'];
+
+  final bigFruts = ['BANANA',for(final big in total) big.toUpperCase()];
+
+  print('$total && $ifInList && $bigFruts');
+
+
+  //SET {Обеуты}
+
   
+
 }
