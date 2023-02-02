@@ -1,6 +1,7 @@
 // ignore_for_file: dead_code
 
 import 'dart:ffi';
+import 'dart:math';
 
 late int
     global; // late - модификатор для того чтоб задавать переменную без значения вне функции
@@ -310,5 +311,24 @@ void main() {
   final freshFruts = newFruts.toSet(); // копирование обекта (если присваивать на прямую по следующие изменения будут относиться не ттолько к копии но и к орегиналу удаление и т .д)
   print(freshFruts);
 
+  var newFruts2 = {...freshFruts, 'drags', if(true)'coco'}; // спред оператор і if работаю так же как і в массиве
+  print(newFruts2);
+
+  final randomGenerator = Random(); 
+  final randomList = <int>[];
+
+  for (var i = 0; i < 10; i++) {
+    final randomInt = randomGenerator.nextInt(10); // метод для создания рамдомныз чисел от 0 и до значения что мы указали
+    randomList.add(randomInt);
+  }  
+  print(randomList);
+  final uniqueValue = <int>[];
+  final doublikateValue = <int>[];
+  for (var element in randomList) { // действия для того чтоб определить дубликати (если нужно только уникальные значение можно массив переделать в обект и дубликати не будут выводиться)
+    if (uniqueValue.contains(element)) {
+      doublikateValue.add(element);
+    } uniqueValue.add(element);
+  }
+  print(doublikateValue);
 
 }
