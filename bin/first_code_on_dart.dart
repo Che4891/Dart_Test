@@ -283,7 +283,7 @@ void main() {
 
   print('$total && $ifInList && $bigFruts');
 
-  //SET {Обекты}
+  //SET
 
   //create SET
 
@@ -303,32 +303,65 @@ void main() {
   newFruts.remove('pear'); // удаление елемента
   newFruts.addAll(['kiwi', 'avocado']);
   print(newFruts);
-   
+
   for (var element in newFruts) {
     print('I\'m love $element');
   }
 
-  final freshFruts = newFruts.toSet(); // копирование обекта (если присваивать на прямую по следующие изменения будут относиться не ттолько к копии но и к орегиналу удаление и т .д)
+  final freshFruts = newFruts
+      .toSet(); // копирование Set (если присваивать на прямую по следующие изменения будут относиться не ттолько к копии но и к орегиналу удаление и т .д)
   print(freshFruts);
 
-  var newFruts2 = {...freshFruts, 'drags', if(true)'coco'}; // спред оператор і if работаю так же как і в массиве
+  var newFruts2 = {
+    ...freshFruts,
+    'drags',
+    if (true) 'coco'
+  }; // спред оператор і if работаю так же как і в массиве
   print(newFruts2);
 
-  final randomGenerator = Random(); 
+  final randomGenerator = Random();
   final randomList = <int>[];
 
   for (var i = 0; i < 10; i++) {
-    final randomInt = randomGenerator.nextInt(10); // метод для создания рамдомныз чисел от 0 и до значения что мы указали
+    final randomInt = randomGenerator.nextInt(
+        10); // метод для создания рамдомныз чисел от 0 и до значения что мы указали
     randomList.add(randomInt);
-  }  
+  }
   print(randomList);
   final uniqueValue = <int>[];
   final doublikateValue = <int>[];
-  for (var element in randomList) { // действия для того чтоб определить дубликати (если нужно только уникальные значение можно массив переделать в обект и дубликати не будут выводиться)
+  for (var element in randomList) {
+    // действия для того чтоб определить дубликати (если нужно только уникальные значение можно массив переделать в set и дубликати не будут выводиться)
     if (uniqueValue.contains(element)) {
       doublikateValue.add(element);
-    } uniqueValue.add(element);
+    }
+    uniqueValue.add(element);
   }
   print(doublikateValue);
 
+  // Математические операции с Set
+  final setA = {'Anton', 'Inna', "Eva"};
+  final setB = {'Eva', 'Sasha'};
+  final interSection = setA.intersection(
+      setB); // intersection - метод который находит одинаковые значения и записывае их в новый Set {'Eva'}
+
+  final union =
+      setA.union(setB); // union - обединение двух Set (дубликат удаляеться)
+
+  final diference = setA.difference(
+      setB); // difference - записывае в новый Set угткальные значение из setA ( игнорируеться то что совпадает с setB)
+  print('$interSection, $union, $diference');
+
+// MAP {Обкеты}
+
+  final Map<String, int> emptiMap = {}; // явное указание типа
+  final emptiMap1 = <String, int>{}; // явное указание типа
+  final emptiMap2 = {}; // Dart по пустому обекту сам определяет что это Map
+
+  final caloriesInFrut = { //ключт и значения могут быть разных типов
+    'apple': 200,
+    'pinapple': 'empty',
+    'watermelon': [250, 300],
+  };
+  print(caloriesInFrut);
 }
