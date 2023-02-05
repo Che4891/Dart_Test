@@ -363,5 +363,16 @@ void main() {
     'pinapple': 'empty',
     'watermelon': [250, 300],
   };
-  print(caloriesInFrut);
+ final numberCaloriesInApple = caloriesInFrut['apple']; // получение значения по ключу  
+  caloriesInFrut['orange']= 300; //добавление елемента по ключу
+  caloriesInFrut['orange']= 100; //изменение значения по ключу
+  caloriesInFrut.remove('pinapple'); //удаление елемента по ключу
+  print(caloriesInFrut.isEmpty); // проверка на то или пустой обект
+  print(caloriesInFrut.isNotEmpty); // проверка на то или не пустой обект
+  print(caloriesInFrut.keys); // віводим тооллько ключи
+  print(caloriesInFrut.values); //віводим только значение
+
+ print('$numberCaloriesInApple + $caloriesInFrut');
+ 
+
 }
