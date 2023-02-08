@@ -371,8 +371,108 @@ void main() {
   print(caloriesInFrut.isNotEmpty); // проверка на то или не пустой обект
   print(caloriesInFrut.keys); // віводим тооллько ключи
   print(caloriesInFrut.values); //віводим только значение
+  print(caloriesInFrut.containsKey('apple')); // проверка или есть такой Key
+  print(caloriesInFrut.containsValue(10)); //проверка или есть такое value в обекье
+
 
  print('$numberCaloriesInApple + $caloriesInFrut');
- 
 
+ //Методы перебора Map
+
+ for (var element in caloriesInFrut.entries) {
+   print('${element.key} => ${element.value}');
+ }
+
+ for (var element in caloriesInFrut.keys) {
+   print('$element');
+ }
+
+ // Iterables обект
+
+ final myList = ['a', 'b', 'c',];
+ print(myList);
+ final myReversList = myList.reversed; // возвращает список в обратном порядке но его быструю копию тоесто не заходя в середину (Iterables обект)
+ print(myReversList);
+ print(myReversList.toList()); // переделываем обратно в обычный список
+ 
+Iterable<String> myIttereble = myList; // в ручную делаем  Iterables обект
+final twoElement = myIttereble.elementAt(1); // поиск елемента по индексу (dart для єтого перебирает весь обект с помощью forIn)
+print(twoElement);
+print(myIttereble.last);
+print(myIttereble.first);
+print(myIttereble.length); // в Iterables даже простые методы требуют переборов всей колекции
+
+
+
+// FUNCTION
+
+sayHello();
+String myName1 = getName();
+String myAge = getAge(38);
+String mySecond = getSecondName('Izotov');
+
+print('$myName1 $mySecond and $myAge');
+getFullInformation('Anton', 38);
+testFunctionOne('Anton');
+testFunctionTwo(age: 38, name: 'Anton');
+testNewFunction();
 }
+
+void sayHello(){
+  print('Hello Anton'); // Void указываеться если в функции нет return
+}
+
+getName(){
+  return 'Anton'; // return возвращает значение функции
+}
+getAge(int age){
+  return "You age $age"; // вот так передаються аргументы
+}
+
+getSecondName(String secondName) => 'My second name is $secondName'; // обікновенная стрелочная функция как в JS делает return тела
+
+getFullInformation(name, age){ // передае 2 параметра без указания их типа
+ print('My name is $name, I\'m $age years old');
+}
+
+testFunctionOne(name, [age]){ // [] - обозначают не обязательный параметр (если его не указать замениться на null)
+  print('$name  & $age'); 
+}
+
+testFunctionTwo({name, age}) { // {} - обозначаються именнованные параметры порядок терерь не имеет значения
+  print('$name  & $age'); 
+}
+
+var arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var test_list = ["dart", "abc", "good luck"];
+List<String> aList = [];
+List<String> bList = [];
+List<String> cList = [];
+
+
+
+testNewFunction(){
+  test_list.asMap().forEach((index, value) => {
+    // print(value.split(''))
+    if (index == 0) {
+       aList = value.split('')
+    } else if (index == 1) {
+      bList = value.split('')
+    } else if (index == 2) {
+       cList = value.split('')
+    }  
+  });
+  // for (var element in test_list) {
+  //     List<String> list = element.split('');
+  //     for (var i in list) {
+  //       if (i != ' ') {
+  //         print('test ${arr_en.indexOf(i)+1}');
+  //       }
+  //     }
+      
+  // }
+
+  
+}
+
+
