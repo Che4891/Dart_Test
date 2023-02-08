@@ -416,6 +416,13 @@ getFullInformation('Anton', 38);
 testFunctionOne('Anton');
 testFunctionTwo(age: 38, name: 'Anton');
 testNewFunction();
+final firstSum = firstAmount();
+final secondSum = secondAmount();
+final therdSum = therdAmount();
+
+
+print('$firstSum $secondSum $therdSum');
+
 }
 
 void sayHello(){
@@ -443,6 +450,7 @@ testFunctionTwo({name, age}) { // {} - обозначаються именнов
   print('$name  & $age'); 
 }
 
+
 var arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var test_list = ["dart", "abc", "good luck"];
 List<String> aList = [];
@@ -461,18 +469,31 @@ testNewFunction(){
     } else if (index == 2) {
        cList = value.split('')
     }  
-  });
-  // for (var element in test_list) {
-  //     List<String> list = element.split('');
-  //     for (var i in list) {
-  //       if (i != ' ') {
-  //         print('test ${arr_en.indexOf(i)+1}');
-  //       }
-  //     }
-      
-  // }
-
-  
+  }); 
 }
+  firstAmount(){
+    int sum =0;
+    for (var i in aList) {
+      sum += arr_en.indexOf(i)+1;
+    }
+    return sum*1;
+  }
 
+secondAmount(){
+    int sum =0;
+    for (var i in bList) {
+      sum += arr_en.indexOf(i)+1;
+    }
+    return sum*2;
+  }
+
+  therdAmount(){
+    int sum =0;
+    for (var i in cList) {
+      if (i !=' '){
+        sum += arr_en.indexOf(i)+1;
+      }
+    }
+    return sum*3;
+  }
 
