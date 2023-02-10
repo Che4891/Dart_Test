@@ -462,15 +462,6 @@ testNewFunction(){
        cList = value.split('')
     }  
   });
-  // for (var element in test_list) {
-  //     List<String> list = element.split('');
-  //     for (var i in list) {
-  //       if (i != ' ') {
-  //         print('test ${arr_en.indexOf(i)+1}');
-  //       }
-  //     }
-      
-  // }
 
   
 }
