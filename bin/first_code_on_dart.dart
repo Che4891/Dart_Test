@@ -423,6 +423,9 @@ print('$firstSum $secondSum $therdSum');
 
 
 testForFunction();
+anonimFun(2, 3);
+int result = operatorNumbers(3, 7, (a, b) => a - b);
+print('428  $result');
 }
 
 void sayHello(){
@@ -483,9 +486,23 @@ void getPerson(Function myFuctions) {
 // Функция которая при return вызывает другую функцию
 
 Function getNameOrLastName(String mayValue) {
-  if (mayValue == 'Anton') { return getmyName;
-  }else return getLastName;
+  if (mayValue == 'Anton') {
+    return getmyName;
+  } else {
+    return getLastName;
+  }
 }
+
+// Анонимная функция ( не именнованная функция)
+
+Function anonimFun = (int a,int b) => print(a + b); // записіваем в переменную функцию и візіваем віше с анрументами
+
+int operatorNumbers(int a, int b, Function operation){ // еще один пример в агрумент мі передаем значение и функцию которія что то делает но пока не указано что (укажем віше когда зададим аргумент)
+  return operation(a, b);
+}
+
+
+
 
 
 
