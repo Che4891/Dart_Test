@@ -419,10 +419,10 @@ testNewFunction();
 final firstSum = firstAmount();
 final secondSum = secondAmount();
 final therdSum = therdAmount();
-
-
 print('$firstSum $secondSum $therdSum');
 
+
+testForFunction();
 }
 
 void sayHello(){
@@ -450,7 +450,46 @@ testFunctionTwo({name, age}) { // {} - обозначаються именнов
   print('$name  & $age'); 
 }
 
+// Работа с функциями
 
+void testForFunction() {
+
+  Function person = getmyName; // записываем а переменную линк на функцию
+  person();
+  person = getLastName; // перезаписываем линк на функцию
+  person();
+
+  getPerson(getmyName); // передаю в качестве аргумента другую функцию
+  getPerson(getLastName); // передаю в качестве аргумента другую функцию
+
+  Function myPerson = getNameOrLastName('Sidor');
+  myPerson();
+}
+
+  void getmyName() {
+    print('Anton');
+  }
+
+  void getLastName() {
+    print('Izotov');
+  }
+
+// Функция в качестве аргумента к другой функции
+
+void getPerson(Function myFuctions) {
+  myFuctions();
+}
+
+// Функция которая при return вызывает другую функцию
+
+Function getNameOrLastName(String mayValue) {
+  if (mayValue == 'Anton') { return getmyName;
+  }else return getLastName;
+}
+
+
+
+  // ДЗ
 var arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var test_list = ["dart", "abc", "good luck"];
 List<String> aList = [];
@@ -496,4 +535,3 @@ secondAmount(){
     }
     return sum*3;
   }
-
