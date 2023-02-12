@@ -1,6 +1,3 @@
-// ignore_for_file: dead_code
-
-import 'dart:ffi';
 import 'dart:math';
 
 late int
@@ -358,105 +355,120 @@ void main() {
   final emptiMap1 = <String, int>{}; // явное указание типа
   final emptiMap2 = {}; // Dart по пустому обекту сам определяет что это Map
 
-  final caloriesInFrut = { //ключт и значения могут быть разных типов
+  final caloriesInFrut = {
+    //ключт и значения могут быть разных типов
     'apple': 200,
     'pinapple': 'empty',
     'watermelon': [250, 300],
   };
- final numberCaloriesInApple = caloriesInFrut['apple']; // получение значения по ключу  
-  caloriesInFrut['orange']= 300; //добавление елемента по ключу
-  caloriesInFrut['orange']= 100; //изменение значения по ключу
+  final numberCaloriesInApple =
+      caloriesInFrut['apple']; // получение значения по ключу
+  caloriesInFrut['orange'] = 300; //добавление елемента по ключу
+  caloriesInFrut['orange'] = 100; //изменение значения по ключу
   caloriesInFrut.remove('pinapple'); //удаление елемента по ключу
   print(caloriesInFrut.isEmpty); // проверка на то или пустой обект
   print(caloriesInFrut.isNotEmpty); // проверка на то или не пустой обект
   print(caloriesInFrut.keys); // віводим тооллько ключи
   print(caloriesInFrut.values); //віводим только значение
   print(caloriesInFrut.containsKey('apple')); // проверка или есть такой Key
-  print(caloriesInFrut.containsValue(10)); //проверка или есть такое value в обекье
+  print(caloriesInFrut
+      .containsValue(10)); //проверка или есть такое value в обекье
 
+  print('$numberCaloriesInApple + $caloriesInFrut');
 
- print('$numberCaloriesInApple + $caloriesInFrut');
+  //Методы перебора Map
 
- //Методы перебора Map
+  for (var element in caloriesInFrut.entries) {
+    print('${element.key} => ${element.value}');
+  }
 
- for (var element in caloriesInFrut.entries) {
-   print('${element.key} => ${element.value}');
- }
+  for (var element in caloriesInFrut.keys) {
+    print('$element');
+  }
 
- for (var element in caloriesInFrut.keys) {
-   print('$element');
- }
+  // Iterables обект
 
- // Iterables обект
+  final myList = [
+    'a',
+    'b',
+    'c',
+  ];
+  print(myList);
+  final myReversList = myList
+      .reversed; // возвращает список в обратном порядке но его быструю копию тоесто не заходя в середину (Iterables обект)
+  print(myReversList);
+  print(myReversList.toList()); // переделываем обратно в обычный список
 
- final myList = ['a', 'b', 'c',];
- print(myList);
- final myReversList = myList.reversed; // возвращает список в обратном порядке но его быструю копию тоесто не заходя в середину (Iterables обект)
- print(myReversList);
- print(myReversList.toList()); // переделываем обратно в обычный список
- 
-Iterable<String> myIttereble = myList; // в ручную делаем  Iterables обект
-final twoElement = myIttereble.elementAt(1); // поиск елемента по индексу (dart для єтого перебирает весь обект с помощью forIn)
-print(twoElement);
-print(myIttereble.last);
-print(myIttereble.first);
-print(myIttereble.length); // в Iterables даже простые методы требуют переборов всей колекции
-
-
+  Iterable<String> myIttereble = myList; // в ручную делаем  Iterables обект
+  final twoElement = myIttereble.elementAt(
+      1); // поиск елемента по индексу (dart для єтого перебирает весь обект с помощью forIn)
+  print(twoElement);
+  print(myIttereble.last);
+  print(myIttereble.first);
+  print(myIttereble
+      .length); // в Iterables даже простые методы требуют переборов всей колекции
 
 // FUNCTION
 
-sayHello();
-String myName1 = getName();
-String myAge = getAge(38);
-String mySecond = getSecondName('Izotov');
+  sayHello();
+  String myName1 = getName();
+  String myAge = getAge(38);
+  String mySecond = getSecondName('Izotov');
 
-print('$myName1 $mySecond and $myAge');
-getFullInformation('Anton', 38);
-testFunctionOne('Anton');
-testFunctionTwo(age: 38, name: 'Anton');
-testNewFunction();
-final firstSum = firstAmount();
-final secondSum = secondAmount();
-final therdSum = therdAmount();
-print('$firstSum $secondSum $therdSum');
+  print('$myName1 $mySecond and $myAge');
+  getFullInformation('Anton', 38);
+  testFunctionOne('Anton');
+  testFunctionTwo(age: 38, name: 'Anton');
+  testNewFunction();
+  final firstSum = firstAmount();
+  final secondSum = secondAmount();
+  final therdSum = therdAmount();
+  print('$firstSum $secondSum $therdSum');
 
+  testForFunction();
+  anonimFun(2, 3);
+  int result = operatorNumbers(3, 7, (a, b) => a - b);
+  print('428  $result');
 
-testForFunction();
-anonimFun(2, 3);
-int result = operatorNumbers(3, 7, (a, b) => a - b);
-print('428  $result');
+  Function add = addNumber(4);
+  int resylt = add(6);
+  print(' my resylt $resylt');
+  serverFunction();
 }
 
-void sayHello(){
+void sayHello() {
   print('Hello Anton'); // Void указываеться если в функции нет return
 }
 
-getName(){
+getName() {
   return 'Anton'; // return возвращает значение функции
 }
-getAge(int age){
+
+getAge(int age) {
   return "You age $age"; // вот так передаються аргументы
 }
 
-getSecondName(String secondName) => 'My second name is $secondName'; // обікновенная стрелочная функция как в JS делает return тела
+getSecondName(String secondName) =>
+    'My second name is $secondName'; // обікновенная стрелочная функция как в JS делает return тела
 
-getFullInformation(name, age){ // передае 2 параметра без указания их типа
- print('My name is $name, I\'m $age years old');
+getFullInformation(name, age) {
+  // передае 2 параметра без указания их типа
+  print('My name is $name, I\'m $age years old');
 }
 
-testFunctionOne(name, [age]){ // [] - обозначают не обязательный параметр (если его не указать замениться на null)
-  print('$name  & $age'); 
+testFunctionOne(name, [age]) {
+  // [] - обозначают не обязательный параметр (если его не указать замениться на null)
+  print('$name  & $age');
 }
 
-testFunctionTwo({name, age}) { // {} - обозначаються именнованные параметры порядок терерь не имеет значения
-  print('$name  & $age'); 
+testFunctionTwo({name, age}) {
+  // {} - обозначаються именнованные параметры порядок терерь не имеет значения
+  print('$name  & $age');
 }
 
 // Работа с функциями
 
 void testForFunction() {
-
   Function person = getmyName; // записываем а переменную линк на функцию
   person();
   person = getLastName; // перезаписываем линк на функцию
@@ -469,13 +481,13 @@ void testForFunction() {
   myPerson();
 }
 
-  void getmyName() {
-    print('Anton');
-  }
+void getmyName() {
+  print('Anton');
+}
 
-  void getLastName() {
-    print('Izotov');
-  }
+void getLastName() {
+  print('Izotov');
+}
 
 // Функция в качестве аргумента к другой функции
 
@@ -495,60 +507,108 @@ Function getNameOrLastName(String mayValue) {
 
 // Анонимная функция ( не именнованная функция)
 
-Function anonimFun = (int a,int b) => print(a + b); // записіваем в переменную функцию и візіваем віше с анрументами
+Function anonimFun = (int a, int b) => print(
+    a + b); // записіваем в переменную функцию и візіваем віше с анрументами
 
-int operatorNumbers(int a, int b, Function operation){ // еще один пример в агрумент мі передаем значение и функцию которія что то делает но пока не указано что (укажем віше когда зададим аргумент)
+int operatorNumbers(int a, int b, Function operation) {
+  // еще один пример в агрумент мі передаем значение и функцию которія что то делает но пока не указано что (укажем віше когда зададим аргумент)
   return operation(a, b);
 }
 
+// Замікание функции
+Function addNumber(int x) {
+  // єто внешняя функция она получает свой параметр при візове
+  int sum(int y) {
+    // єто внутренняя функция она принимает свой параметр когда мі перезаписіваем внешнию
+    return x + y;
+  }
 
+  return sum;
+}
 
+// Исключение Try / On / Cetch / Finaly /
 
+void serverFunction() {
+  try {
+    var errorInList = [double.parse('3,34'), 5, 7];  // с помощью try проверяем или нет ошибки если нет то віполняесться код. если есть то переходит дальше
+    print(errorInList);
+  } on FormatException { //  on - помогает проверить на конкретную ошибку например если ошибка FormatException віполниться єтот шаг если нет то дальше переходит
+    print('This error FormatException');
+  } catch (e) { // catch - сюда заходит если два предідущих условия не віполнились и в /e/ попадет ошибка
+    print(e);
+  } finally { // finally - сюда зайдет в любом случає не имеет значения будут ошибки или нетт
+    print('it\'s fynally');
+  }
+}
 
-
-  // ДЗ
-var arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+// ДЗ
+var arr_en = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z'
+];
 var test_list = ["dart", "abc", "good luck"];
 List<String> aList = [];
 List<String> bList = [];
 List<String> cList = [];
 
-
-
-testNewFunction(){
+testNewFunction() {
   test_list.asMap().forEach((index, value) => {
-    // print(value.split(''))
-    if (index == 0) {
-       aList = value.split('')
-    } else if (index == 1) {
-      bList = value.split('')
-    } else if (index == 2) {
-       cList = value.split('')
-    }  
-  }); 
+        // print(value.split(''))
+        if (index == 0)
+          {aList = value.split('')}
+        else if (index == 1)
+          {bList = value.split('')}
+        else if (index == 2)
+          {cList = value.split('')}
+      });
 }
-  firstAmount(){
-    int sum =0;
-    for (var i in aList) {
-      sum += arr_en.indexOf(i)+1;
-    }
-    return sum*1;
-  }
 
-secondAmount(){
-    int sum =0;
-    for (var i in bList) {
-      sum += arr_en.indexOf(i)+1;
-    }
-    return sum*2;
+firstAmount() {
+  int sum = 0;
+  for (var i in aList) {
+    sum += arr_en.indexOf(i) + 1;
   }
+  return sum * 1;
+}
 
-  therdAmount(){
-    int sum =0;
-    for (var i in cList) {
-      if (i !=' '){
-        sum += arr_en.indexOf(i)+1;
-      }
-    }
-    return sum*3;
+secondAmount() {
+  int sum = 0;
+  for (var i in bList) {
+    sum += arr_en.indexOf(i) + 1;
   }
+  return sum * 2;
+}
+
+therdAmount() {
+  int sum = 0;
+  for (var i in cList) {
+    if (i != ' ') {
+      sum += arr_en.indexOf(i) + 1;
+    }
+  }
+  return sum * 3;
+}
