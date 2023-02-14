@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:mirrors';
 
 late int
     global; // late - модификатор для того чтоб задавать переменную без значения вне функции
@@ -434,6 +435,17 @@ void main() {
   int resylt = add(6);
   print(' my resylt $resylt');
   serverFunction();
+
+    try{
+        Person tom = Person("Tom", -45);
+        print(tom.age);
+    }
+     on AgeException catch(e){
+         print(e.getErrorMessage());
+    }finally {
+      print("Finish program");
+    }
+    
 }
 
 void sayHello() {
@@ -530,15 +542,43 @@ Function addNumber(int x) {
 
 void serverFunction() {
   try {
-    var errorInList = [double.parse('3,34'), 5, 7];  // с помощью try проверяем или нет ошибки если нет то віполняесться код. если есть то переходит дальше
+    var errorInList = [
+      double.parse('3,34'),
+      5,
+      7
+    ]; // с помощью try проверяем или нет ошибки если нет то віполняесться код. если есть то переходит дальше
     print(errorInList);
-  } on FormatException { //  on - помогает проверить на конкретную ошибку например если ошибка FormatException віполниться єтот шаг если нет то дальше переходит
+  } on FormatException {
+    //  on - помогает проверить на конкретную ошибку например если ошибка FormatException віполниться єтот шаг если нет то дальше переходит
     print('This error FormatException');
-  } catch (e) { // catch - сюда заходит если два предідущих условия не віполнились и в /e/ попадет ошибка
+  } catch (e) {
+    // catch - сюда заходит если два предідущих условия не віполнились и в /e/ попадет ошибка
     print(e);
-  } finally { // finally - сюда зайдет в любом случає не имеет значения будут ошибки или нетт
+  } finally {
+    // finally - сюда зайдет в любом случає не имеет значения будут ошибки или нетт
     print('it\'s fynally');
   }
+}
+
+// Пользовательские исключения
+
+class Person{
+    String name;
+    int age = 1;
+      
+    Person(this.name, age){
+        if(age < 1 || age > 110) {
+            throw AgeException();  // вызываем класс который вызовет пользовательское событие и будет досткпно для отследивания через try & catch (выше есть фугкция где проверяеться условие чеоез try & catch)
+        }
+        else{
+            this.age = age;
+        }
+    }
+}
+class AgeException  implements Exception{
+    String getErrorMessage() {
+        return "Incorrect age";
+    }
 }
 
 // ДЗ
