@@ -445,7 +445,23 @@ void main() {
     }finally {
       print("Finish program");
     }
-    
+
+   Car myCAr = Car(); // візов класса и присвоение его свойством значение
+
+   myCAr.carName = 'Ford';
+   myCAr.start();
+
+
+  Car myCAr2 = Car('Skoda','red'); // параметрі передаюится для конструктора ( віше +myCAr+ мі передаем параметрі как бі без конструктора)
+  myCAr2.newCar();
+
+  var myCarNamed = Car.fromColor('green');
+  myCarNamed.newCar();
+
+  
+  Car myCarw3 = Car.constructirNamed('Pink');
+  myCarw3.newCar();
+
 }
 
 void sayHello() {
@@ -580,6 +596,41 @@ class AgeException  implements Exception{
         return "Incorrect age";
     }
 }
+
+// CLASS
+
+
+class Car {
+  String ?carName;
+  var color;
+
+  Car([this.carName, this.color = 'grey']);  // конструктор класаа - может принималь параметрі и віполнять какую то логику например мі можем поставить по умолчанию значение color = "grey" 
+
+  // Car([carName, color]) {   єто то же что и записано віше просто расписано и видно что мі принимаем параметрі віше и дальше через this передаем их в локальніе переменніе [] - чтоб они могли біть не обязательніми
+  //   this.carName=carName;
+  //   this.color=color;
+  // }
+
+  Car.fromColor(color){  // Именнованній конструктор - конструктор без именни может біть ттоолько 1 чтоб их біло несколько добавляеться именной конструктор которій принимает свои параметрі при візове
+    carName = "Dodge";
+    this.color = color;
+  }
+
+  Car.constructirNamed(var color): this("Acura", color); // Инициалецатор конструктора - єто когда с помощью одного конструктора я візвал самій первій (не именноваггій) и в него передал значения
+
+
+  void start() {
+    print('$carName has a $color color');
+
+  }
+   void newCar() {
+    print('$carName is my new car and has $color color');
+  }
+}
+
+
+
+
 
 // ДЗ
 var arr_en = [
