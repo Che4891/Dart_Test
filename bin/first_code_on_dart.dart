@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 import 'dart:mirrors';
 
@@ -102,7 +103,7 @@ void main() {
   Object? testObject = 23; //правильнее вместо dynamic использовать Object
   testObject = 'Hello';
 
-  var testVar; // var по умолчанию сначала тоже dynamic
+  Object testVar; // var по умолчанию сначала тоже dynamic
   testVar = 10;
   testVar = 'Hello';
 
@@ -436,32 +437,51 @@ void main() {
   print(' my resylt $resylt');
   serverFunction();
 
-    try{
-        Person tom = Person("Tom", -45);
-        print(tom.age);
-    }
-     on AgeException catch(e){
-         print(e.getErrorMessage());
-    }finally {
-      print("Finish program");
-    }
+  try {
+    Person tom = Person("Tom", -45);
+    print(tom.age);
+  } on AgeException catch (e) {
+    print(e.getErrorMessage());
+  } finally {
+    print("Finish program");
+  }
 
-   Car myCAr = Car(); // візов класса и присвоение его свойством значение
+  Car myCAr = Car(); // візов класса и присвоение его свойством значение
 
-   myCAr.carName = 'Ford';
-   myCAr.start();
+  myCAr.carName = 'Ford';
+  myCAr.start();
 
-
-  Car myCAr2 = Car('Skoda','red'); // параметрі передаюится для конструктора ( віше +myCAr+ мі передаем параметрі как бі без конструктора)
+  Car myCAr2 = Car('Skoda',
+      'red'); // параметрі передаюится для конструктора ( віше +myCAr+ мі передаем параметрі как бі без конструктора)
   myCAr2.newCar();
 
   var myCarNamed = Car.fromColor('green');
   myCarNamed.newCar();
 
-  
   Car myCarw3 = Car.constructirNamed('Pink');
   myCarw3.newCar();
 
+  Cat sarguk = Cat();
+
+  sarguk.name = "Sarguk";
+  sarguk.age = 18;
+  print('TEST ${sarguk.age}');
+
+  ClassMoser moser = ClassMoser();
+  moser.colorSkin = 'White';
+  moser.ourSkin();
+
+  ClassDoter doter = ClassDoter();
+  doter.colorSkin = 'Black'; // наследуеться от родителя
+  doter.ourSkin(); // наследуеться от родителя
+  doter.colorEyes = "Blue";
+  doter.openEyes();
+
+  ClassSyn syn = ClassSyn();
+  syn.colorSkin = "Yellow";
+  syn.ourSkin();
+  syn.colorHairy = "Red";
+  syn.combHairy();
 }
 
 void sayHello() {
@@ -578,56 +598,105 @@ void serverFunction() {
 
 // Пользовательские исключения
 
-class Person{
-    String name;
-    int age = 1;
-      
-    Person(this.name, age){
-        if(age < 1 || age > 110) {
-            throw AgeException();  // вызываем класс который вызовет пользовательское событие и будет досткпно для отследивания через try & catch (выше есть фугкция где проверяеться условие чеоез try & catch)
-        }
-        else{
-            this.age = age;
-        }
+class Person {
+  String name;
+  int age = 1;
+
+  Person(this.name, age) {
+    if (age < 1 || age > 110) {
+      throw AgeException(); // вызываем класс который вызовет пользовательское событие и будет досткпно для отследивания через try & catch (выше есть фугкция где проверяеться условие чеоез try & catch)
+    } else {
+      this.age = age;
     }
+  }
 }
-class AgeException  implements Exception{
-    String getErrorMessage() {
-        return "Incorrect age";
-    }
+
+class AgeException implements Exception {
+  String getErrorMessage() {
+    return "Incorrect age";
+  }
 }
 
 // CLASS
 
-
 class Car {
-  String ?carName;
+  String? carName;
   var color;
 
-  Car([this.carName, this.color = 'grey']);  // конструктор класаа - может принималь параметрі и віполнять какую то логику например мі можем поставить по умолчанию значение color = "grey" 
+  Car(
+      [this.carName,
+      this.color =
+          'grey']); // конструктор класаа - может принималь параметрі и віполнять какую то логику например мі можем поставить по умолчанию значение color = "grey"
 
   // Car([carName, color]) {   єто то же что и записано віше просто расписано и видно что мі принимаем параметрі віше и дальше через this передаем их в локальніе переменніе [] - чтоб они могли біть не обязательніми
   //   this.carName=carName;
   //   this.color=color;
   // }
 
-  Car.fromColor(color){  // Именнованній конструктор - конструктор без именни может біть ттоолько 1 чтоб их біло несколько добавляеться именной конструктор которій принимает свои параметрі при візове
+  Car.fromColor(color) {
+    // Именнованній конструктор - конструктор без именни может біть ттоолько 1 чтоб их біло несколько добавляеться именной конструктор которій принимает свои параметрі при візове
     carName = "Dodge";
     this.color = color;
   }
 
-  Car.constructirNamed(var color): this("Acura", color); // Инициалецатор конструктора - єто когда с помощью одного конструктора я візвал самій первій (не именноваггій) и в него передал значения
-
+  Car.constructirNamed(var color)
+      : this("Acura",
+            color); // Инициалецатор конструктора - єто когда с помощью одного конструктора я візвал самій первій (не именноваггій) и в него передал значения
 
   void start() {
     print('$carName has a $color color');
-
   }
-   void newCar() {
+
+  void newCar() {
     print('$carName is my new car and has $color color');
   }
 }
 
+//Getter & Setter in CLASS
+
+class Cat {
+  String? name;
+  var _age;
+
+  set age(int per) {
+    // set метод которій принимает значение ( может делать какие то проверки) и записівает в локальную переменную
+    (per > 0 && per < 100) ? _age = per : _age = 0;
+  }
+
+  int get age {
+    // get єто метод которій возвращает переменную на верх
+    return _age;
+  }
+}
+
+//Наследование Class с помощью ключевого слова Extends класси детей могут использовать методі и свойста родителей
+class ClassMoser {
+  String? colorSkin;
+
+  void ourSkin() {
+    print('We have a $colorSkin skrin');
+  }
+}
+
+class ClassDoter extends ClassMoser {
+  String? colorEyes;
+
+  void openEyes() {
+    print('My eyes is $colorEyes');
+  }
+}
+
+class ClassSyn extends ClassMoser {
+  String? colorHairy;
+  
+  // ClassSyn.fromColor(super.colorSkin) : super.fromColor() {      // конструктор не наследуеться на прямую а только через слово Super
+  //   print('Syns skin is $colorSkin');
+  // }
+
+  void combHairy() {
+    print('My $colorHairy is comb');
+  }
+}
 
 
 
