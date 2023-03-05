@@ -482,6 +482,14 @@ void main() {
   syn.ourSkin();
   syn.colorHairy = "Red";
   syn.combHairy();
+
+
+  NextClass nextClass = NextClass('RED', 100,'Yellow');
+  nextClass.mainTest();
+
+    Employee bob = Employee("Bob", "Google");
+    bob.display();  // Employee name: Bob
+    bob.work(); 
 }
 
 void sayHello() {
@@ -688,14 +696,80 @@ class ClassDoter extends ClassMoser {
 
 class ClassSyn extends ClassMoser {
   String? colorHairy;
-  
-  // ClassSyn.fromColor(super.colorSkin) : super.fromColor() {      // конструктор не наследуеться на прямую а только через слово Super
-  //   print('Syns skin is $colorSkin');
-  // }
 
   void combHairy() {
     print('My $colorHairy is comb');
   }
+}
+
+
+ // конструктор не наследуеться на прямую а только через слово Super (ниже пример как наследуеться конструктор)
+class MainClass {
+  String? mainOption;
+
+  MainClass.testNamed(var mainOption){
+    this.mainOption = mainOption;
+    print('This is test wear i show $mainOption');
+  }
+
+  void mainTest() {
+    print('This is $mainOption');
+  }
+}
+
+class NextClass extends MainClass {
+  String? nextOption;
+  int? newNumber;
+  
+  NextClass(var nextOption, var newNumber, var mainOption): super.testNamed(mainOption){
+    this.nextOption = nextOption;
+    this.newNumber = newNumber;
+    print('nextOption $nextOption && mainOption $mainOption');
+  }
+
+ // Наследование и переопределение методов из родительского конструктора
+
+ @override
+  void mainTest() {
+    super.mainTest();
+    print('This is $newNumber');
+    print('This is $nextOption');
+  }
+}
+
+
+//Интерфейс (возможность переиспользовать несколько класов одновременно)
+
+ 
+class Persons{
+  
+    String name;
+    Persons(this.name);
+      
+    void display(){
+        print("Name: $name");
+    }
+}
+class Worker{
+    String company = "";
+    void work(){
+        print("Work in $company");
+    }
+}
+class Employee implements Persons, Worker{
+ 
+    String name;            // реализация поля name из Person
+    String company;         // реализация поля company из Worker
+    // реализация метода display Person
+    void display(){     
+        print("Employee name: $name");
+    }
+    // реализация метода work из Worker
+    void work(){
+        print("Employee works in $company");
+    }
+     
+    Employee(this.name, this.company);
 }
 
 
