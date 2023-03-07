@@ -483,13 +483,22 @@ void main() {
   syn.colorHairy = "Red";
   syn.combHairy();
 
-
-  NextClass nextClass = NextClass('RED', 100,'Yellow');
+  NextClass nextClass = NextClass('RED', 100, 'Yellow');
   nextClass.mainTest();
 
-    Employee bob = Employee("Bob", "Google");
-    bob.display();  // Employee name: Bob
-    bob.work(); 
+  Employee bob = Employee("Bob", "Google");
+  bob.display(); // Employee name: Bob
+  bob.work();
+
+  Sallary sallary = Sallary("Anton", "SalesPower");
+  sallary.display();
+  sallary.work();
+
+  NewTrain newTrain = NewTrain();
+  newTrain.move();
+
+  MyTestGeneric myTestGeneric =MyTestGeneric(777, 'Test');
+  myTestGeneric.isTestCase();
 }
 
 void sayHello() {
@@ -702,12 +711,11 @@ class ClassSyn extends ClassMoser {
   }
 }
 
-
- // конструктор не наследуеться на прямую а только через слово Super (ниже пример как наследуеться конструктор)
+// конструктор не наследуеться на прямую а только через слово Super (ниже пример как наследуеться конструктор)
 class MainClass {
   String? mainOption;
 
-  MainClass.testNamed(var mainOption){
+  MainClass.testNamed(var mainOption) {
     this.mainOption = mainOption;
     print('This is test wear i show $mainOption');
   }
@@ -720,16 +728,17 @@ class MainClass {
 class NextClass extends MainClass {
   String? nextOption;
   int? newNumber;
-  
-  NextClass(var nextOption, var newNumber, var mainOption): super.testNamed(mainOption){
+
+  NextClass(var nextOption, var newNumber, var mainOption)
+      : super.testNamed(mainOption) {
     this.nextOption = nextOption;
     this.newNumber = newNumber;
     print('nextOption $nextOption && mainOption $mainOption');
   }
 
- // Наследование и переопределение методов из родительского конструктора
+  // Наследование и переопределение методов из родительского конструктора
 
- @override
+  @override
   void mainTest() {
     super.mainTest();
     print('This is $newNumber');
@@ -737,41 +746,90 @@ class NextClass extends MainClass {
   }
 }
 
-
 //Интерфейс (возможность переиспользовать несколько класов одновременно)
 
- 
-class Persons{
-  
-    String name;
-    Persons(this.name);
-      
-    void display(){
-        print("Name: $name");
-    }
-}
-class Worker{
-    String company = "";
-    void work(){
-        print("Work in $company");
-    }
-}
-class Employee implements Persons, Worker{
- 
-    String name;            // реализация поля name из Person
-    String company;         // реализация поля company из Worker
-    // реализация метода display Person
-    void display(){     
-        print("Employee name: $name");
-    }
-    // реализация метода work из Worker
-    void work(){
-        print("Employee works in $company");
-    }
-     
-    Employee(this.name, this.company);
+class Persons {
+  String name;
+  Persons(this.name);
+
+  void display() {
+    print("Name: $name");
+  }
 }
 
+class Worker {
+  String company = "";
+  void work() {
+    print("Work in $company");
+  }
+}
+
+class Employee implements Persons, Worker {
+  String name; // реализация поля name из Person
+  String company; // реализация поля company из Worker
+  // реализация метода display Person
+  void display() {
+    print("Employee name: $name");
+  }
+
+  // реализация метода work из Worker
+  void work() {
+    print("Employee works in $company");
+  }
+
+  Employee(this.name, this.company);
+}
+
+//Миксині (еще ожно решение для множественного наследования)
+
+class Personio {
+  String name;
+  Personio(this.name);
+  void display() {
+    print("Name: $name");
+  }
+}
+
+mixin Workers {
+  // можно использовать слово class b и так же использовать его независимо или mixin і іспользовать для переопределения
+  String company = "";
+  void work() {
+    print("Work in $company");
+  }
+}
+
+class Sallary extends Personio with Workers {
+  // with - используеться для того чтоб использовать второе переиспользование (миксин)
+
+  Sallary(name, comp) : super(name) {
+    company = comp; // обращаемся к полю company, определенному в миксине Worker
+  }
+}
+
+// абстрактніе классі (классі которіе не используються на прямую а их методі можно использовать тодлько в других классах)
+
+abstract class MoveCar {
+  void move();
+}
+
+class NewTrain extends MoveCar {
+  void move() {
+    print("This is test for NewTrain");
+  }
+}
+
+
+// GENERICS (єто возможность обойти тепизированній тип дарта если переменная может біть и строкой и числом)
+
+class MyTestGeneric <T> {
+ T id; // єтот параметр передаеться как строка так и число
+ String name;
+
+ MyTestGeneric(this.id, this.name);
+ void isTestCase(){
+  print('Test how loks $id and $name');
+ }
+}
 
 
 
