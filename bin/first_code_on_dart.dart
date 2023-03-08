@@ -497,8 +497,13 @@ void main() {
   NewTrain newTrain = NewTrain();
   newTrain.move();
 
-  MyTestGeneric myTestGeneric =MyTestGeneric(777, 'Test');
+  MyTestGeneric myTestGeneric = MyTestGeneric(777, 'Test');
   myTestGeneric.isTestCase();
+
+  print('Start server test');
+  printDailyNewsDigest();
+  getOldNews();
+  print('End server test');
 }
 
 void sayHello() {
@@ -818,20 +823,56 @@ class NewTrain extends MoveCar {
   }
 }
 
-
 // GENERICS (єто возможность обойти тепизированній тип дарта если переменная может біть и строкой и числом)
 
-class MyTestGeneric <T> {
- T id; // єтот параметр передаеться как строка так и число
- String name;
+class MyTestGeneric<T> {
+  T id; // єтот параметр передаеться как строка так и число
+  String name;
 
- MyTestGeneric(this.id, this.name);
- void isTestCase(){
-  print('Test how loks $id and $name');
- }
+  MyTestGeneric(this.id, this.name);
+  void isTestCase() {
+    print('Test how loks $id and $name');
+  }
+}
+
+// Асинхронное програмирование (Async  Await) (https://habr.com/ru/post/442282/)
+
+Future<void> printDailyNewsDigest() async { // вызываем downloadNews и ждем пока она вернет ответ если не будет async она вернет єто 'Future<String>'
+  final newsDigest = await downloadNews();
+  print(newsDigest);
+}
+
+// та же функция только с проверкой на ошибки
+
+// Future<void> printDailyNewsDigest() async {
+//   try {
+//     var newsDigest = await downloadNews();
+//     print(newsDigest);
+//   } catch (e) {
+//     //  error...
+//   }
+// }
+
+
+
+const news = 'Gathered news goes here';
+const oneSecond = Duration(seconds: 2);
+
+Future<String> downloadNews() { // тут имитация получения запроса с сервера с задержкой на 2 секунды 
+  return Future.delayed(oneSecond, () => news);
 }
 
 
+// Асинхронное програмирование (Future API старая технология через then)
+
+Future<void> getOldNews() {
+  final futureNews = oldNewsReports();
+  return futureNews.then(print).catchError((error) =>'This news not found');
+  // You don't *have* to return the future here.
+}
+
+Future<String> oldNewsReports() =>
+    Future.delayed((Duration(seconds: 3)), () => 'This is old news');
 
 // ДЗ
 var arr_en = [
